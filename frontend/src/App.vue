@@ -129,10 +129,16 @@
 </style>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import axios from "axios";
 
+//filter variables
+let searchValue = ref("");
+let filterType = ref("first_name");
+
 let employees = ref([]);
+let unfilteredList = ref([]);
+
 
 onMounted(async () => {
   await fetchEmployees();
@@ -162,4 +168,41 @@ async function removeEmployee(id) {
       console.log(error);
     });
 }
+
+function filter() {
+  if (searchValue.value === "") {
+    employees.value = unfilteredList.value;
+    return;
+  }
+
+  if (filterType.value == "skills") {
+    employees.value = unfilteredList.value.filter((employee) => {
+      return employee[filterType.value].some((skill) => {
+        return skill.name
+          .toLowerCase()
+          .includes(searchValue.value.toLowerCase());
+      });
+    });
+  } else if (filterType.value == "date_of_birth") {
+    let year = searchValue.value;
+    employees.value = unfilteredList.value.filter((employee) => {
+      let employeeYear = employee[filterType.value].slice(0, 4);
+      return employeeYear == year;
+    });
+  } else {
+    employees.value = unfilteredList.value.filter((employee) => {
+      return employee[filterType.value]
+        .toLowerCase()
+        .includes(searchValue.value.toLowerCase());
+    });
+  }
+}
+
+watch(searchValue, () => {
+  filter();
+});
+
+watch(filterType, () => {
+  filter();
+});
 </script>
