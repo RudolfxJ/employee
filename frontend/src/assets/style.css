@@ -68,3 +68,13 @@
   width: 5px;
   height: 5px;
 }
+
+.card,
+.card-header,
+.card-body,
+.card-footer {
+  border-radius: 10px;
+  background-color: rgb(118, 112, 112);
+  color: white;
+}
+
