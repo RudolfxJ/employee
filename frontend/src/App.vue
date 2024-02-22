@@ -669,6 +669,54 @@ function validate() {
   return true;
 }
 
+async function submitForm() {
+  if (!validate()) {
+    return;
+  }
+  if (!form.value?.id) {
+    await axios
+      .post("employees/", form.value)
+      .then(async (response) => {
+        errors.value = []
+        if (response.status == 201) {
+          closeModal();
+          localStorage.removeItem("form");
+          localStorage.removeItem("inProgress");
+          await fetchEmployees();
+        } else {
+          errors.value = response.data;
+        }
+      })
+      .catch((error) => {
+        if (error?.response?.data) {
+          errors.value = error.response.data;
+        } else {
+          errors.value = "Server Error";
+        }
+      });
+  } else {
+    await axios
+      .put(`employees/${form.value.id}/`, form.value)
+      .then(async (response) => {
+        errors.value = []
+        if (response.status == 200) {
+          closeModal();
+          localStorage.removeItem("form");
+          await fetchEmployees();
+        } else {
+          errors.value = response.data;
+        }
+      })
+      .catch((error) => {
+        if (error?.response?.data) {
+          errors.value = error.response.data;
+        } else {
+          errors.value = "Server Error";
+        }
+      });
+  }
+}
+
 function closeModal() {
   let modal = Modal.getOrCreateInstance(employeeModal.value);
   modal.hide();
