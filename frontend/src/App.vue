@@ -99,6 +99,13 @@
             </div>
             <div class="col-5 d-flex">
               <span
+                class="material-icons centered-content ms-auto"
+                style="cursor: pointer"
+                @click="editEmployee(employee)"
+              >
+                create
+              </span>
+              <span
                 class="material-icons centered-content ms-2"
                 style="cursor: pointer"
                 @click="removeEmployee(employee.id)"
@@ -140,11 +147,33 @@ let filterType = ref("first_name");
 let employees = ref([]);
 let unfilteredList = ref([]); // original data stored to cache employees before filtering
 
+//form variables
+let form = ref({
+  first_name: "",
+  last_name: "",
+  contact_number: "",
+  email: "",
+  date_of_birth: "",
+  street_address: "",
+  city: "",
+  postal_code: "",
+  country: "",
+  skill: [
+    {
+      name: "",
+      years_experience: "",
+      seniority_rating: "Beginner",
+    },
+  ],
+});
+let errors = ref([]);
 
 onMounted(async () => {
   await fetchEmployees();
+  if (localStorage.getItem("form")) {
+    form.value = JSON.parse(localStorage.getItem("form"));
+  }
 });
-
 async function fetchEmployees() {
   await axios
     .get("employees/")
@@ -168,6 +197,11 @@ async function removeEmployee(id) {
     .catch((error) => {
       console.log(error);
     });
+}
+
+function editEmployee(employee) {
+  form.value = JSON.parse(JSON.stringify(employee));
+  localStorage.setItem("form", JSON.stringify(form.value));
 }
 
 function filter() {
@@ -198,6 +232,17 @@ function filter() {
     });
   }
 }
+
+watch(
+  form,
+  () => {
+    localStorage.setItem("form", JSON.stringify(form.value));
+    if (!form.value?.id) {
+      localStorage.setItem("inProgress", JSON.stringify(form.value));
+    }
+  },
+  { deep: true }
+);
 
 watch(searchValue, () => {
   filter();
