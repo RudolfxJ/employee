@@ -659,6 +659,16 @@ function editEmployee(employee) {
   showModal()
 }
 
+function validate() {
+  let skills = form.value.skill;
+  if (formElement.value.checkValidity() === false) {
+    formElement.value.classList.add("was-validated");
+    return false;
+  }
+
+  return true;
+}
+
 function closeModal() {
   let modal = Modal.getOrCreateInstance(employeeModal.value);
   modal.hide();
