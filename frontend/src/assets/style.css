@@ -39,3 +39,32 @@
   color: white;
   padding: 30px;
 }
+
+.btn {
+  border-radius: 5px;
+  background-color: rgb(117, 112, 112);
+  color: white;
+}
+
+.btn:hover {
+  background-color: rgb(102, 98, 98);
+}
+
+.btn-primary {
+  border-radius: 30px;
+  background-color: rgb(110, 34, 173);
+  border: 1px solid rgb(110, 34, 173);
+}
+
+.btn-primary:hover {
+  background-color: rgb(77, 23, 122);
+  border: 1px solid rgb(77, 23, 122);
+}
+
+.btn-close {
+  color: white;
+  background-color: white;
+  margin-right: 10px !important;
+  width: 5px;
+  height: 5px;
+}
