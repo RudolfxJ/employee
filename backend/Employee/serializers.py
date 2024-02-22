@@ -16,6 +16,30 @@ class EmployeeSerializer(serializers.ModelSerializer):
         model = Employee
         exclude = ("employee_code",)
 
+    def validate(self, attrs):
+        request = self.context.get("request")
+        if request.data:
+            data = request.data
+        else:
+            raise serializers.ValidationError({"request": "request object not found"})
+        skills = data.get("skill")
+        if skills:
+            for skill in skills:
+                if not skill["name"]:
+                    raise serializers.ValidationError(
+                        {"skill": "Please provide skill name."}
+                    )
+                if not skill["years_experience"]:
+                    raise serializers.ValidationError(
+                        {"skill": "Please provide number of years of experience."}
+                    )
+                if not skill["seniority_rating"]:
+                    raise serializers.ValidationError(
+                        {"skill": "Please provide seniority level"}
+                    )
+
+        return super().validate(attrs)
+
     def create(self, validated_data):
         return self.create_employee(validated_data)
 
