@@ -4,7 +4,7 @@
     class="container" 
     style="height: 100vh"
   >
-  <div 
+    <div 
       id="nav" 
       class="mb-5"
     >
@@ -73,6 +73,44 @@
           </button>
         </div>
       </div>
+    </div>
+    <div 
+      v-if="employees.length > 0"
+      id="employees" 
+    >
+      <div 
+        v-for="(employee, index) in employees"
+        :key="employee"
+        class="card mb-3"
+      >
+        <div class="card-body d-flex left-content">
+          <div class="row w-100">
+            <div class="col-1">
+              <span class="circle-text">{{ index + 1 }}</span>
+            </div>
+            <div class="col-2">
+              {{ employee.first_name }}
+            </div>
+            <div class="col-2">
+              {{ employee.last_name }}
+            </div>
+            <div class="col-2">
+              {{ employee.contact_number }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div 
+      v-else
+      class="centered-content-stacked"
+    >
+      <img src="./assets/no-employees.jpg">
+      <p>There is nothing here</p>
+      <p>
+        Create a new employee by clicking the <br>
+        <strong>New Employee</strong> button to get started.
+      </p>
     </div>
   </div>
 </template>
