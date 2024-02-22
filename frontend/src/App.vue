@@ -136,8 +136,9 @@ import axios from "axios";
 let searchValue = ref("");
 let filterType = ref("first_name");
 
+//employee variables
 let employees = ref([]);
-let unfilteredList = ref([]);
+let unfilteredList = ref([]); // original data stored to cache employees before filtering
 
 
 onMounted(async () => {
