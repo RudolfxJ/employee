@@ -57,14 +57,15 @@ class EmployeeSerializer(serializers.ModelSerializer):
             data = request.data
         else:
             raise serializers.ValidationError({"server error": "no request passed"})
-        skills = data.pop("skill")
-        Skill.objects.filter(employee=employee).delete() if instance else ""
-        for skill in skills:
-            skill["employee"] = employee.id
-        serializer = SkillSerializer(data=skills, many=True)
-        if serializer.is_valid():
-            serializer.save()
-            return employee
-        else:
-            print(serializer.errors)
-            raise serializers.ValidationError(serializer.errors)
+
+        if data.get('skill'):
+            skills = data.pop("skill")
+            Skill.objects.filter(employee=employee).delete() if instance else ""
+            for skill in skills:
+                skill["employee"] = employee.id
+            serializer = SkillSerializer(data=skills, many=True)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                raise serializers.ValidationError(serializer.errors)
+        return employee
