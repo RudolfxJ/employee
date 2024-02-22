@@ -14,14 +14,22 @@ Ensure the following are installed on your system:
 
 ### Create Virtual Environment
 
-``` bash
-python -m venv venv
+``` bash linux
+python3 -m venv .env
+```
+
+``` bash windows
+py -m venv .env
 ```
 
 ### Activate Virtual Environment
 
-``` bash
+``` bash linux
 .env/bin/activate
+```
+
+``` bash windows
+.env/scripts/activate
 ```
 
 ### Navigate to the 'backend' Directory
@@ -35,6 +43,18 @@ cd backend
 ``` bash
 pip install -r requirements.txt
 ```
+
+### Create and configure django .env file from .env_template
+
+``` bash
+cp .env_template .env
+```
+
+Edit variables to match your environment:
+SECRET_KEY=1234
+CORS_ALLOWED_ORIGINS=http://127.0.0.1:8080 http://localhost:8080
+ALLOWED_HOSTS=localhost
+DEBUG=true
 
 ### Migrate the Database
 
@@ -58,13 +78,18 @@ python manage.py runserver
 
 ``` bash
 cd frontend
-npm install
+npm i
 ```
 
-## Frontend Configuration
+### Create and configure vue .env file from .env_template
 
-Add the following to .env file:
-VUE_APP_BASE_URL = [http://localhost:8000](http://localhost:8000) as an example
+``` bash
+cp .env_template .env
+```
+
+Add the following to .env file matching your local environment:
+VUE_APP_BASE_URL=http://localhost:8000
+as an example
 
 ### Steps to Run the Frontend Server
 
@@ -75,5 +100,6 @@ npm run serve
 ## Steps to Build the Frontend
 
 ``` bash
+cd frontend
 npm run build
 ```
