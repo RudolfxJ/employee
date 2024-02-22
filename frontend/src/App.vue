@@ -566,12 +566,8 @@
       </div>
     </div>
   </div>
-
 </template>
 
-<style scoped>
-
-</style>
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
