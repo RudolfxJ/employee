@@ -97,6 +97,15 @@
             <div class="col-2">
               {{ employee.contact_number }}
             </div>
+            <div class="col-5 d-flex">
+              <span
+                class="material-icons centered-content ms-2"
+                style="cursor: pointer"
+                @click="removeEmployee(employee.id)"
+              >
+                delete
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -121,7 +130,36 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import axios from "axios";
+
 let employees = ref([]);
+
 onMounted(async () => {
-})
+  await fetchEmployees();
+});
+
+async function fetchEmployees() {
+  await axios
+    .get("employees/")
+    .then((response) => {
+      const data = response.data;
+      employees.value = data;
+      unfilteredList.value = data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+async function removeEmployee(id) {
+  if (!confirm("Are you sure?")) return;
+  await axios
+    .delete(`employees/${id}/`)
+    .then(() => {
+      fetchEmployees();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 </script>
