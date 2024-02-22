@@ -629,6 +629,18 @@ async function fetchEmployees() {
     });
 }
 
+function newEmployee() {
+  if (localStorage.getItem("inProgress")) {
+    form.value = JSON.parse(localStorage.getItem("inProgress"));
+  } else {
+    form.value = {
+      skill: [{ seniority_rating: "Beginner" }],
+    };
+  }
+  localStorage.setItem("form", JSON.stringify(form.value));
+  showModal();
+}
+
 async function removeEmployee(id) {
   if (!confirm("Are you sure?")) return;
   await axios
