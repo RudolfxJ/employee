@@ -11,13 +11,13 @@ class Command(BaseCommand):
         "date_of_birth": "1990-01-01",
         "street_address": "123 Any Street",
         "city": "Anytown",
-        "postal_code": "12345",
+        "postal_code": "1235",
         "country": "USA",
         "skills": [
             {
             "name": "Programming",
             "years_experience": "5",
-            "seniority_rating": "Senior",
+            "seniority_rating": "Advanced",
             },
         ],
         },
@@ -29,13 +29,13 @@ class Command(BaseCommand):
         "date_of_birth": "1992-02-02",
         "street_address": "456 Any Avenue",
         "city": "Anytown",
-        "postal_code": "54321",
+        "postal_code": "5421",
         "country": "USA",
         "skills": [
             {
             "name": "Design",
             "years_experience": "3",
-            "seniority_rating": "Junior",
+            "seniority_rating": "Beginner",
             },
         ],
         },
@@ -47,13 +47,13 @@ class Command(BaseCommand):
         "date_of_birth": "1994-03-03",
         "street_address": "789 Any Boulevard",
         "city": "Anytown",
-        "postal_code": "67890",
+        "postal_code": "6789",
         "country": "USA",
         "skills": [
             {
             "name": "Project Management",
             "years_experience": "2",
-            "seniority_rating": "Intermediate",
+            "seniority_rating": "Expert",
             },
         ],
         },
