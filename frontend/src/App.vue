@@ -129,6 +129,26 @@
       </p>
     </div>
   </div>
+
+  <!-- modal element   -->
+  <div
+    id="manage-employee-Modal"
+    ref="employeeModal"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="manage-employee-ModalLabel"
+    aria-hidden="true"
+  >
+    <div 
+      class="modal-dialog" 
+      style="font-size: xx-small"
+    >
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <style scoped>
@@ -138,6 +158,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import axios from "axios";
+import { Modal } from "bootstrap";
 
 //filter variables
 let searchValue = ref("");
@@ -167,6 +188,9 @@ let form = ref({
   ],
 });
 let errors = ref([]);
+
+//html elements
+let employeeModal = ref(undefined);
 
 onMounted(async () => {
   await fetchEmployees();
@@ -202,6 +226,17 @@ async function removeEmployee(id) {
 function editEmployee(employee) {
   form.value = JSON.parse(JSON.stringify(employee));
   localStorage.setItem("form", JSON.stringify(form.value));
+  showModal()
+}
+
+function closeModal() {
+  let modal = Modal.getOrCreateInstance(employeeModal.value);
+  modal.hide();
+}
+
+function showModal() {
+  let modal = Modal.getOrCreateInstance(employeeModal.value);
+  modal.show();
 }
 
 function filter() {
