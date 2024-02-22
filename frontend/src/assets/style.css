@@ -1,0 +1,41 @@
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.centered-content-stacked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+
+}
+
+.left-content {
+  display: flex;
+  justify-content: left;
+  text-align: left;
+}
+
+.left-content-stacked {
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  flex-direction: column;
+}
+
+.right-content {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  text-align: right;
+}
+
+#app {
+  background-color: rgb(17, 0, 16);
+  color: white;
+  padding: 30px;
+}
