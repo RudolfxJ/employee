@@ -719,6 +719,25 @@ async function submitForm() {
   }
 }
 
+function addSkill() {
+  form.value.skill.push({
+    name: "",
+    years_experience: "",
+    seniority_rating: "Beginner",
+  });
+}
+
+function removeSkill(index) {
+  form.value.skill.splice(index, 1);
+  if (form.value.skill.length === 0) {
+    form.value.skill.push({
+      name: "",
+      years_experience: "",
+      seniority_rating: "Beginner",
+    });
+  }
+}
+
 function closeModal() {
   let modal = Modal.getOrCreateInstance(employeeModal.value);
   modal.hide();
