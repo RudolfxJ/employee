@@ -88,3 +88,35 @@
   border-radius: 35px;
   font-size: x-small;
 }
+
+.form-header {
+  font-size: larger;
+  color: rgb(173, 89, 255);
+}
+
+ul {
+  padding-left: 15px !important;
+  font-size: larger;
+  font-weight: bold;
+}
+
+#search_input {
+  background-color: rgb(23, 0, 23);
+  color: white;
+}
+
+#search_input::placeholder {
+  color: white;
+}
+
+.circle-text {
+  border-radius: 50%;
+  color: rgb(67, 59, 67);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgb(67, 59, 67);
+}
